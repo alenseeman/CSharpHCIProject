@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="hciModelStoreContainer" CdmEntityContainer="hciEntities1">
+    <EntitySetMapping Name="dogadjajs">
+      <EntityTypeMapping TypeName="hciModel.dogadjaj">
+        <MappingFragment StoreEntitySet="dogadjaj">
+          <ScalarProperty Name="iddogadjaj" ColumnName="iddogadjaj" />
+          <ScalarProperty Name="naziv" ColumnName="naziv" />
+          <ScalarProperty Name="lokacija" ColumnName="lokacija" />
+          <ScalarProperty Name="opis" ColumnName="opis" />
+          <ScalarProperty Name="datumPocetka" ColumnName="datumPocetka" />
+          <ScalarProperty Name="datumKraja" ColumnName="datumKraja" />
+          <ScalarProperty Name="vrijemePocetka" ColumnName="vrijemePocetka" />
+          <ScalarProperty Name="vrijemeKraja" ColumnName="vrijemeKraja" />
+          <ScalarProperty Name="obrisan" ColumnName="obrisan" />
+          <ScalarProperty Name="vrsta" ColumnName="vrsta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="elements">
+      <EntityTypeMapping TypeName="hciModel.element">
+        <MappingFragment StoreEntitySet="element">
+          <ScalarProperty Name="idelement" ColumnName="idelement" />
+          <ScalarProperty Name="naziv" ColumnName="naziv" />
+          <ScalarProperty Name="lokacija" ColumnName="lokacija" />
+          <ScalarProperty Name="opis" ColumnName="opis" />
+          <ScalarProperty Name="datumPocetka" ColumnName="datumPocetka" />
+          <ScalarProperty Name="datumKraja" ColumnName="datumKraja" />
+          <ScalarProperty Name="vrijemePocetka" ColumnName="vrijemePocetka" />
+          <ScalarProperty Name="vrijemeKraja" ColumnName="vrijemeKraja" />
+          <ScalarProperty Name="podDogadjaj_idpodDogadjaj" ColumnName="podDogadjaj_idpodDogadjaj" />
+          <ScalarProperty Name="obrisan" ColumnName="obrisan" />
+          <ScalarProperty Name="vrsta" ColumnName="vrsta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fajls">
+      <EntityTypeMapping TypeName="hciModel.fajl">
+        <MappingFragment StoreEntitySet="fajl">
+          <ScalarProperty Name="idfajl" ColumnName="idfajl" />
+          <ScalarProperty Name="naziv" ColumnName="naziv" />
+          <ScalarProperty Name="podaci" ColumnName="podaci" />
+          <ScalarProperty Name="dogadjaj_iddogadjaj" ColumnName="dogadjaj_iddogadjaj" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="korisniks">
+      <EntityTypeMapping TypeName="hciModel.korisnik">
+        <MappingFragment StoreEntitySet="korisnik">
+          <ScalarProperty Name="idkorisnik" ColumnName="idkorisnik" />
+          <ScalarProperty Name="ime" ColumnName="ime" />
+          <ScalarProperty Name="prezime" ColumnName="prezime" />
+          <ScalarProperty Name="korisnickoIme" ColumnName="korisnickoIme" />
+          <ScalarProperty Name="sifra" ColumnName="sifra" />
+          <ScalarProperty Name="salt" ColumnName="salt" />
+          <ScalarProperty Name="admin" ColumnName="admin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="poddogadjajs">
+      <EntityTypeMapping TypeName="hciModel.poddogadjaj">
+        <MappingFragment StoreEntitySet="poddogadjaj">
+          <ScalarProperty Name="idpodDogadjaj" ColumnName="idpodDogadjaj" />
+          <ScalarProperty Name="naziv" ColumnName="naziv" />
+          <ScalarProperty Name="lokacija" ColumnName="lokacija" />
+          <ScalarProperty Name="opis" ColumnName="opis" />
+          <ScalarProperty Name="datumPocetka" ColumnName="datumPocetka" />
+          <ScalarProperty Name="datumKraja" ColumnName="datumKraja" />
+          <ScalarProperty Name="vrijemePocetka" ColumnName="vrijemePocetka" />
+          <ScalarProperty Name="vrijemKraja" ColumnName="vrijemKraja" />
+          <ScalarProperty Name="dogadjaj_iddogadjaj" ColumnName="dogadjaj_iddogadjaj" />
+          <ScalarProperty Name="obrisan" ColumnName="obrisan" />
+          <ScalarProperty Name="vrsta" ColumnName="vrsta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

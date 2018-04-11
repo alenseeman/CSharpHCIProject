@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="mydbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="mydbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="dogadjajs" EntityType="mydbModel.dogadjaj" />
+    <EntitySet Name="elements" EntityType="mydbModel.element" />
+    <EntitySet Name="fajls" EntityType="mydbModel.fajl" />
+    <EntitySet Name="korisniks" EntityType="mydbModel.korisnik" />
+    <EntitySet Name="poddogadjajs" EntityType="mydbModel.poddogadjaj" />
+    <AssociationSet Name="fk_fajl_dogadjaj1" Association="mydbModel.fk_fajl_dogadjaj1">
+      <End Role="dogadjaj" EntitySet="dogadjajs" />
+      <End Role="fajl" EntitySet="fajls" />
+    </AssociationSet>
+    <AssociationSet Name="fk_podDogadjaj_dogadjaj" Association="mydbModel.fk_podDogadjaj_dogadjaj">
+      <End Role="dogadjaj" EntitySet="dogadjajs" />
+      <End Role="poddogadjaj" EntitySet="poddogadjajs" />
+    </AssociationSet>
+    <AssociationSet Name="fk_element_podDogadjaj1" Association="mydbModel.fk_element_podDogadjaj1">
+      <End Role="poddogadjaj" EntitySet="poddogadjajs" />
+      <End Role="element" EntitySet="elements" />
+    </AssociationSet>
+    <AssociationSet Name="fk_fajl_element1" Association="mydbModel.fk_fajl_element1">
+      <End Role="element" EntitySet="elements" />
+      <End Role="fajl" EntitySet="fajls" />
+    </AssociationSet>
+    <AssociationSet Name="fk_fajl_podDogadjaj1" Association="mydbModel.fk_fajl_podDogadjaj1">
+      <End Role="poddogadjaj" EntitySet="poddogadjajs" />
+      <End Role="fajl" EntitySet="fajls" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="dogadjaj">
+    <Key>
+      <PropertyRef Name="iddogadjaj" />
+    </Key>
+    <Property Name="iddogadjaj" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="naziv" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="lokacija" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="opis" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="datumPocetka" Type="DateTime" Nullable="false" />
+    <Property Name="datumKraja" Type="DateTime" Nullable="false" />
+    <Property Name="vrijemePocetka" Type="Time" Nullable="false" />
+    <Property Name="vrijemeKraja" Type="Time" Nullable="false" />
+    <Property Name="obrisan" Type="Boolean" />
+    <NavigationProperty Name="fajls" Relationship="mydbModel.fk_fajl_dogadjaj1" FromRole="dogadjaj" ToRole="fajl" />
+    <NavigationProperty Name="poddogadjajs" Relationship="mydbModel.fk_podDogadjaj_dogadjaj" FromRole="dogadjaj" ToRole="poddogadjaj" />
+  </EntityType>
+  <EntityType Name="element">
+    <Key>
+      <PropertyRef Name="idelement" />
+    </Key>
+    <Property Name="idelement" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="naziv" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="lokacija" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="opis" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="datumPocetka" Type="DateTime" Nullable="false" />
+    <Property Name="datumKraja" Type="DateTime" Nullable="false" />
+    <Property Name="vrijemePocetka" Type="Time" Nullable="false" />
+    <Property Name="vrijemeKraja" Type="Time" Nullable="false" />
+    <Property Name="podDogadjaj_idpodDogadjaj" Type="Int32" Nullable="false" />
+    <Property Name="obrisan" Type="Boolean" />
+    <NavigationProperty Name="poddogadjaj" Relationship="mydbModel.fk_element_podDogadjaj1" FromRole="element" ToRole="poddogadjaj" />
+    <NavigationProperty Name="fajls" Relationship="mydbModel.fk_fajl_element1" FromRole="element" ToRole="fajl" />
+  </EntityType>
+  <EntityType Name="fajl">
+    <Key>
+      <PropertyRef Name="idfajl" />
+    </Key>
+    <Property Name="idfajl" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="naziv" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="podaci" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="dogadjaj_iddogadjaj" Type="Int32" Nullable="false" />
+    <Property Name="podDogadjaj_idpodDogadjaj" Type="Int32" Nullable="false" />
+    <Property Name="element_idelement" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="dogadjaj" Relationship="mydbModel.fk_fajl_dogadjaj1" FromRole="fajl" ToRole="dogadjaj" />
+    <NavigationProperty Name="element" Relationship="mydbModel.fk_fajl_element1" FromRole="fajl" ToRole="element" />
+    <NavigationProperty Name="poddogadjaj" Relationship="mydbModel.fk_fajl_podDogadjaj1" FromRole="fajl" ToRole="poddogadjaj" />
+  </EntityType>
+  <EntityType Name="korisnik">
+    <Key>
+      <PropertyRef Name="idkorisnik" />
+    </Key>
+    <Property Name="idkorisnik" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ime" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="prezime" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="korisnickoIme" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="sifra" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="salt" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="admin" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="poddogadjaj">
+    <Key>
+      <PropertyRef Name="idpodDogadjaj" />
+    </Key>
+    <Property Name="idpodDogadjaj" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="naziv" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="lokacija" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="opis" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="datumPocetka" Type="DateTime" Nullable="false" />
+    <Property Name="datumKraja" Type="DateTime" Nullable="false" />
+    <Property Name="vrijemePocetka" Type="Time" Nullable="false" />
+    <Property Name="vrijemKraja" Type="Time" Nullable="false" />
+    <Property Name="dogadjaj_iddogadjaj" Type="Int32" Nullable="false" />
+    <Property Name="obrisan" Type="Boolean" />
+    <NavigationProperty Name="dogadjaj" Relationship="mydbModel.fk_podDogadjaj_dogadjaj" FromRole="poddogadjaj" ToRole="dogadjaj" />
+    <NavigationProperty Name="elements" Relationship="mydbModel.fk_element_podDogadjaj1" FromRole="poddogadjaj" ToRole="element" />
+    <NavigationProperty Name="fajls" Relationship="mydbModel.fk_fajl_podDogadjaj1" FromRole="poddogadjaj" ToRole="fajl" />
+  </EntityType>
+  <Association Name="fk_fajl_dogadjaj1">
+    <End Type="mydbModel.dogadjaj" Role="dogadjaj" Multiplicity="1" />
+    <End Type="mydbModel.fajl" Role="fajl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="dogadjaj">
+        <PropertyRef Name="iddogadjaj" />
+      </Principal>
+      <Dependent Role="fajl">
+        <PropertyRef Name="dogadjaj_iddogadjaj" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_podDogadjaj_dogadjaj">
+    <End Type="mydbModel.dogadjaj" Role="dogadjaj" Multiplicity="1" />
+    <End Type="mydbModel.poddogadjaj" Role="poddogadjaj" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="dogadjaj">
+        <PropertyRef Name="iddogadjaj" />
+      </Principal>
+      <Dependent Role="poddogadjaj">
+        <PropertyRef Name="dogadjaj_iddogadjaj" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_element_podDogadjaj1">
+    <End Type="mydbModel.poddogadjaj" Role="poddogadjaj" Multiplicity="1" />
+    <End Type="mydbModel.element" Role="element" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="poddogadjaj">
+        <PropertyRef Name="idpodDogadjaj" />
+      </Principal>
+      <Dependent Role="element">
+        <PropertyRef Name="podDogadjaj_idpodDogadjaj" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_fajl_element1">
+    <End Type="mydbModel.element" Role="element" Multiplicity="1" />
+    <End Type="mydbModel.fajl" Role="fajl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="element">
+        <PropertyRef Name="idelement" />
+      </Principal>
+      <Dependent Role="fajl">
+        <PropertyRef Name="element_idelement" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_fajl_podDogadjaj1">
+    <End Type="mydbModel.poddogadjaj" Role="poddogadjaj" Multiplicity="1" />
+    <End Type="mydbModel.fajl" Role="fajl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="poddogadjaj">
+        <PropertyRef Name="idpodDogadjaj" />
+      </Principal>
+      <Dependent Role="fajl">
+        <PropertyRef Name="podDogadjaj_idpodDogadjaj" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

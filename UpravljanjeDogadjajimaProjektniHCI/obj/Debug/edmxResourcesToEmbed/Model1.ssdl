@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="hciModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="dogadjaj">
+    <Key>
+      <PropertyRef Name="iddogadjaj" />
+    </Key>
+    <Property Name="iddogadjaj" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="naziv" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="lokacija" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="opis" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="datumPocetka" Type="date" Nullable="false" />
+    <Property Name="datumKraja" Type="date" Nullable="false" />
+    <Property Name="vrijemePocetka" Type="time" Precision="0" Nullable="false" />
+    <Property Name="vrijemeKraja" Type="time" Precision="0" Nullable="false" />
+    <Property Name="obrisan" Type="bool" />
+    <Property Name="vrsta" Type="varchar" MaxLength="55" Nullable="false" />
+  </EntityType>
+  <EntityType Name="element">
+    <Key>
+      <PropertyRef Name="idelement" />
+    </Key>
+    <Property Name="idelement" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="naziv" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="lokacija" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="opis" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="datumPocetka" Type="date" Nullable="false" />
+    <Property Name="datumKraja" Type="date" Nullable="false" />
+    <Property Name="vrijemePocetka" Type="time" Precision="0" Nullable="false" />
+    <Property Name="vrijemeKraja" Type="time" Precision="0" Nullable="false" />
+    <Property Name="podDogadjaj_idpodDogadjaj" Type="int" Nullable="false" />
+    <Property Name="obrisan" Type="bool" />
+    <Property Name="vrsta" Type="varchar" MaxLength="55" Nullable="false" />
+  </EntityType>
+  <EntityType Name="fajl">
+    <Key>
+      <PropertyRef Name="idfajl" />
+    </Key>
+    <Property Name="idfajl" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="naziv" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="podaci" Type="mediumblob" Nullable="false" />
+    <Property Name="dogadjaj_iddogadjaj" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="korisnik">
+    <Key>
+      <PropertyRef Name="idkorisnik" />
+    </Key>
+    <Property Name="idkorisnik" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ime" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="prezime" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="korisnickoIme" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="sifra" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="salt" Type="varbinary" MaxLength="8" Nullable="false" />
+    <Property Name="admin" Type="bool" Nullable="false" />
+  </EntityType>
+  <EntityType Name="poddogadjaj">
+    <Key>
+      <PropertyRef Name="idpodDogadjaj" />
+    </Key>
+    <Property Name="idpodDogadjaj" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="naziv" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="lokacija" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="opis" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="datumPocetka" Type="date" Nullable="false" />
+    <Property Name="datumKraja" Type="date" Nullable="false" />
+    <Property Name="vrijemePocetka" Type="time" Precision="0" Nullable="false" />
+    <Property Name="vrijemKraja" Type="time" Precision="0" Nullable="false" />
+    <Property Name="dogadjaj_iddogadjaj" Type="int" Nullable="false" />
+    <Property Name="obrisan" Type="bool" />
+    <Property Name="vrsta" Type="varchar" MaxLength="55" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_element_podDogadjaj1">
+    <End Role="poddogadjaj" Type="Self.poddogadjaj" Multiplicity="1" />
+    <End Role="element" Type="Self.element" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="poddogadjaj">
+        <PropertyRef Name="idpodDogadjaj" />
+      </Principal>
+      <Dependent Role="element">
+        <PropertyRef Name="podDogadjaj_idpodDogadjaj" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_fajl_dogadjaj1">
+    <End Role="dogadjaj" Type="Self.dogadjaj" Multiplicity="1" />
+    <End Role="fajl" Type="Self.fajl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="dogadjaj">
+        <PropertyRef Name="iddogadjaj" />
+      </Principal>
+      <Dependent Role="fajl">
+        <PropertyRef Name="dogadjaj_iddogadjaj" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_podDogadjaj_dogadjaj">
+    <End Role="dogadjaj" Type="Self.dogadjaj" Multiplicity="1" />
+    <End Role="poddogadjaj" Type="Self.poddogadjaj" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="dogadjaj">
+        <PropertyRef Name="iddogadjaj" />
+      </Principal>
+      <Dependent Role="poddogadjaj">
+        <PropertyRef Name="dogadjaj_iddogadjaj" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="hciModelStoreContainer">
+    <EntitySet Name="dogadjaj" EntityType="Self.dogadjaj" Schema="hci" store:Type="Tables" />
+    <EntitySet Name="element" EntityType="Self.element" Schema="hci" store:Type="Tables" />
+    <EntitySet Name="fajl" EntityType="Self.fajl" Schema="hci" store:Type="Tables" />
+    <EntitySet Name="korisnik" EntityType="Self.korisnik" Schema="hci" store:Type="Tables" />
+    <EntitySet Name="poddogadjaj" EntityType="Self.poddogadjaj" Schema="hci" store:Type="Tables" />
+    <AssociationSet Name="fk_element_podDogadjaj1" Association="Self.fk_element_podDogadjaj1">
+      <End Role="poddogadjaj" EntitySet="poddogadjaj" />
+      <End Role="element" EntitySet="element" />
+    </AssociationSet>
+    <AssociationSet Name="fk_fajl_dogadjaj1" Association="Self.fk_fajl_dogadjaj1">
+      <End Role="dogadjaj" EntitySet="dogadjaj" />
+      <End Role="fajl" EntitySet="fajl" />
+    </AssociationSet>
+    <AssociationSet Name="fk_podDogadjaj_dogadjaj" Association="Self.fk_podDogadjaj_dogadjaj">
+      <End Role="dogadjaj" EntitySet="dogadjaj" />
+      <End Role="poddogadjaj" EntitySet="poddogadjaj" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,6 @@
+Admin privilegije:
+Username: alenseeman 
+Password: alen1993
+Ostali korisnici:
+Username: student
+Password: test
